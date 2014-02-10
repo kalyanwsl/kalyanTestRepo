@@ -1,0 +1,36 @@
+# maven
+/target/
+/activemq-data/
+/ObjectStore/
+
+# IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# eclipse
+.classpath
+.settings/
+.project
+
+# Mule Studio
+.studio/
+.mule
+.metadata
+
+# OS X
+.DS_Store
+
+# Windows
+
+# Linux
+/bin
+
+# GIT IGNORE #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
