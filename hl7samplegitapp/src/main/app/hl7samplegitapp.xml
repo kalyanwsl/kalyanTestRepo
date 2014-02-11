@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd">
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+    <hl7:connector name="HL7_Connector" validateConnections="true" doc:name="HL7 Connector" hl7Encoding="HAPI" validation="WEAK"/>
     <flow name="hl7samplegitappFlow1" doc:name="hl7samplegitappFlow1">
-        <hl7:inbound-endpoint host="localhost" port="7788" responseTimeout="10000" exchange-pattern="request-response" doc:name="HL7 MLLP"/>
+        <hl7:inbound-endpoint host="localhost" port="7788" responseTimeout="10000" exchange-pattern="request-response" doc:name="HL7 MLLP" connector-ref="HL7_Connector"/>
         <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+        <jms:outbound-endpoint doc:name="JMS"/>
+        <jms:outbound-endpoint doc:name="JMS"/>
+        
     </flow>
 </mule>
