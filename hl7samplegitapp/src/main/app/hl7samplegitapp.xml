@@ -11,8 +11,10 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
     <flow name="hl7samplegitappFlow1" doc:name="hl7samplegitappFlow1">
         <hl7:inbound-endpoint host="localhost" port="7788" responseTimeout="10000" exchange-pattern="request-response" doc:name="HL7 MLLP" connector-ref="HL7_Connector"/>
         <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+
         <jms:outbound-endpoint doc:name="JMS"/>
         <jms:outbound-endpoint doc:name="JMS"/>
         
+        <logger level="INFO" doc:name="Logger"/>
     </flow>
 </mule>
