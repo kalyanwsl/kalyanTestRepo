@@ -9,5 +9,6 @@ http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/
     <flow name="hl7samplegitappFlow1" doc:name="hl7samplegitappFlow1">
         <hl7:inbound-endpoint host="localhost" port="7788" responseTimeout="10000" exchange-pattern="request-response" doc:name="HL7 MLLP"/>
         <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+        <logger level="INFO" doc:name="Logger"/>
     </flow>
 </mule>
