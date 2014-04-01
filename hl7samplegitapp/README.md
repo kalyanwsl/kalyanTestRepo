@@ -1,8 +1,6 @@
 [Purpose](#purpose)  
 [Prerequisites](#prerequisites)  
-[Steps to use Mule Deployment plugin](#steps to use mule deployment plugin)  
-
-[Running the deployment plugin](#running the deployment plugin)  
+[Steps to use Mule Deployment plugin](#steps-to-use-Mule-Deployment-plugin)  
 [Resources](#resources)
 
 Purpose
@@ -36,16 +34,3 @@ Following steps need to take to deploy mule applications on mule server using th
           Maven command for MMC:       mvn wsldeploy:mmc -DpropertiesFilePath=G:\mulesoft\MuleAppDeployment\MMCDeployment.properties
           Maven command for Mule Standalone server:  mvn wsldeploy:standalone -DpropertiesFilePath=G:\mulesoft\MuleAppDeployment\StandaloneDeployment.properties
           Maven command for MMC cluster:  mvn wsldeploy:cluster -DpropertiesFilePath=G:\mulesoft\MuleAppDeployment\MMCDeployment.properties
-
-Resources
-=========
-
-Here's a list of features used in this demo with a link to their documentation
-
-●     [Mule Expression Language](http://www.mulesoft.org/documentation/display/MULE3USER/Mule+Expression+Language)  
-●     [Configuring Endpoints](http://www.mulesoft.org/documentation/display/MULE3USER/Configuring+Endpoints)  
-●     [Studio transformers](http://www.mulesoft.org/documentation/display/MULE3STUDIO/Studio+Transformers)  
-●     [Flow references](http://www.mulesoft.org/documentation/display/MULE3STUDIO/Flow+Ref+Component+Reference)
- 
-
-Webinars and additional documentation related to Mule ESB can be found under [Resources](http://www.mulesoft.com/resources) menu option.
