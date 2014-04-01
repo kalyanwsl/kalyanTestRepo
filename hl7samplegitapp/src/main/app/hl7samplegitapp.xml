@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
-http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
     <hl7:connector name="HL7_Connector" validateConnections="true" doc:name="HL7 Connector" hl7Encoding="HAPI" validation="WEAK"/>
+    <mulexml:namespace-manager>
+		<mulexml:namespace uri="urn:hl7-org:v2xml" prefix="request" />
+	</mulexml:namespace-manager>
     <flow name="hl7samplegitappFlow1" doc:name="hl7samplegitappFlow1">
         <hl7:inbound-endpoint host="localhost" port="7788" responseTimeout="10000" exchange-pattern="request-response" doc:name="HL7 MLLP" connector-ref="HL7_Connector"/>
+        <!-- <hl7:ack-component ackCode="AA" validation="STRONG" doc:name="HL7 ACK"/> -->
         <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+        <hl7:hl7-encoding-transformer doc:name="HL7 Encoding Transformer" hl7Encoding="XML" mimeType="text/xml" validation="STRONG"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+        <set-payload value="#[payload.replace('xmlns=&quot;urn:hl7-org:v2xml&quot;','')]" doc:name="Set Payload"/>
+        <logger message="New Payload without namespace #[payload]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="xpath://MSH.9/MSG.2/text() = &quot;A01&quot;">
+                <logger message="#[xpath://MSH.9/MSG.2/text()]Its A01 message" level="INFO" doc:name="Logger"/>
+            </when>
+            <otherwise>
+                <logger message="#[xpath://MSH.9/MSG.2/text()] Its not A01 message" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
 
-        <jms:outbound-endpoint doc:name="JMS"/>
-        <jms:outbound-endpoint doc:name="JMS"/>
-        
-        <logger level="INFO" doc:name="Logger"/>
     </flow>
 </mule>
