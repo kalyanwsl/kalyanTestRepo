@@ -39,5 +39,5 @@ Resources
 ===========
 We referred MMC REST API to deploy mule applications on MMC and Cluster.
 		  
-●	[REST API Reference: Deployments](http://www.mulesoft.org/documentation/display/current/Deployments)
-●	[REST API Reference: Repository of Applications](http://www.mulesoft.org/documentation/display/current/Repository+of+Applications)
+●     [REST API Reference: Deployments](http://www.mulesoft.org/documentation/display/current/Deployments)
+●     [REST API Reference: Repository of Applications](http://www.mulesoft.org/documentation/display/current/Repository+of+Applications)
